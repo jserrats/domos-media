@@ -1,0 +1,9 @@
+numpy
+scipy
+pyqtgraph
+pyaudio
+pyqt5
+paho-mqtt
+python-dateutil
+git+git://github.com/jserrats/telogram.git
+
