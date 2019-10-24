@@ -5,6 +5,8 @@ import __main__
 from strip import StripController
 import telogram
 import settings
+import paho.mqtt.client as mqtt
+
 
 spotify_actions = {"next": next_song, "previous": prev_song, "play": playpause, "get": get_current_song}
 

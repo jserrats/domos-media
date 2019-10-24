@@ -2,9 +2,11 @@ import threading
 import datetime
 from dateutil.tz import gettz
 import time
-from settings import led_stripe_ip, led_stripe_port
 from music_animation.led import _sock
 from music_animation.visualization import microphone, microphone_update, next_animation
+
+strip_ip, strip_port = "strip.lan", 1234
+
 
 NLEDS = 60
 reverse_strip = False
@@ -87,7 +89,7 @@ class Strip(threading.Thread):
 
         self.leds = [colors["black"] for i in range(NLEDS)]
         self.sock = sckt
-        self.adress = (led_stripe_ip, led_stripe_port)
+        self.adress = (strip_ip, strip_port)
 
         self.event = threading.Event()
         self.start()
@@ -132,7 +134,7 @@ class Strip(threading.Thread):
         packet = [255]
         pckt = bytes(packet)
         try:
-            self.sock.sendto(pckt, (led_stripe_ip, led_stripe_port))
+            self.sock.sendto(pckt, (strip_ip, strip_port))
         except OSError:
             pass
 
