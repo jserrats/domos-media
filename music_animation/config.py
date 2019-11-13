@@ -2,7 +2,7 @@
 from __future__ import print_function
 from __future__ import division
 import os
-from strip import strip_ip, strip_port
+from settings import strip_ip, strip_port
 DEVICE = 'esp8266'
 
 UDP_IP = strip_ip

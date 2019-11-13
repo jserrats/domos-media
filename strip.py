@@ -4,8 +4,7 @@ from dateutil.tz import gettz
 import time
 from music_animation.led import _sock
 from music_animation.visualization import microphone, microphone_update, next_animation
-
-strip_ip, strip_port = "strip.lan", 1234
+from settings import strip_ip, strip_port
 
 
 NLEDS = 60
