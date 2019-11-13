@@ -2,12 +2,12 @@
 from __future__ import print_function
 from __future__ import division
 import os
-
+from strip import strip_ip, strip_port
 DEVICE = 'esp8266'
 
-UDP_IP = '10.0.1.3'
+UDP_IP = strip_ip
 """IP address of the ESP8266. Must match IP in ws2812_controller.ino"""
-UDP_PORT = 1234  # 7777
+UDP_PORT = strip_port
 """Port number used for socket communication between Python and ESP8266"""
 SOFTWARE_GAMMA_CORRECTION = False
 """Set to False because the firmware handles gamma correction + dither"""
