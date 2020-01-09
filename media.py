@@ -6,7 +6,7 @@ from strip import StripController
 import telogram
 import settings
 import paho.mqtt.client as mqtt
-
+import subprocess
 
 spotify_actions = {"next": next_song, "previous": prev_song, "play": playpause, "get": get_current_song}
 
@@ -36,8 +36,12 @@ class MediaMQTT:
         self.mqtt_client.subscribe("domos/strip/#")
         self.mqtt_client.subscribe("domos/media/#")
         self.mqtt_client.message_callback_add('domos/media/spotify', self.spotify_action)
+        self.mqtt_client.message_callback_add('domos/media/off', self.off)
         self.mqtt_client.message_callback_add('domos/strip/#', self.strip_action)
         self.mqtt_client.publish('domos/info/strip', 'rainbow', retain=True)
+
+    def off(self, client, userdata, message):
+        subprocess.call(["systemctl poweroff"])
 
     def spotify_action(self, client, userdata, message):
         spotify_actions[message.payload.decode()]()
