@@ -23,9 +23,10 @@ class MediaMQTT:
         self.mqtt_client.loop_forever()
 
     def strip_action(self, client, userdata, message):
+
         if message.payload.decode() == "music_effect":
             self.strip.effect()
-            
+            print(message.payload.decode())
 
 if __name__ == "__main__":
     mqtt_client = mqtt.Client("media")
