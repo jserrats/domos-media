@@ -22,6 +22,7 @@ class StripController:
     def __init__(self):
         self.sock = socket.socket(socket.AF_INET, # Internet
                      socket.SOCK_DGRAM) # UDP
+        self.sock.bind(('0.0.0.0', 54321))
         self.current = None
         self.update_status()
 
@@ -33,9 +34,6 @@ class StripController:
         return self.starthandler(StripClock)
 
     def music(self):
-        return self.starthandler(StripMusic)
-
-    def music_effect(self):
         return self.starthandler(StripMusic)
 
     def notification(self, color=None):
@@ -89,7 +87,7 @@ class Strip(threading.Thread):
 
         self.leds = [colors["black"] for i in range(NLEDS)]
         self.sock = sckt
-        self.adress = strip_address
+        self.adress = (strip_address, 1234)
         self.event = threading.Event()
         self.start()
 
@@ -133,7 +131,7 @@ class Strip(threading.Thread):
         packet = [255]
         pckt = bytes(packet)
         try:
-            self.sock.sendto(pckt, strip_address)
+            self.sock.sendto(pckt, self.adress)
         except OSError:
             pass
 
