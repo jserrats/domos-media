@@ -2,7 +2,8 @@
 
 ## Mqtt
 
-`domos/strip`
->`music_effect`
->`rainbow`
->`clock`
+* `domos/strip`
+  * `music_effect`
+  * `rainbow`
+  * `clock`
+  * `off`
