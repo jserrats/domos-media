@@ -9,7 +9,7 @@ UDP_IP = strip_ip
 """IP address of the ESP8266. Must match IP in ws2812_controller.ino"""
 UDP_PORT = strip_port
 """Port number used for socket communication between Python and ESP8266"""
-SOFTWARE_GAMMA_CORRECTION = False
+SOFTWARE_GAMMA_CORRECTION = True
 """Set to False because the firmware handles gamma correction + dither"""
 
 USE_GUI = False
