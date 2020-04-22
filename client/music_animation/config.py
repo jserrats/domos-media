@@ -2,7 +2,7 @@
 from __future__ import print_function
 from __future__ import division
 import os
-from settings import proxy_address
+from settings import strip_ip, strip_port
 DEVICE = 'esp8266'
 
 UDP_IP = strip_ip
@@ -72,3 +72,4 @@ N_ROLLING_HISTORY = 2
 
 MIN_VOLUME_THRESHOLD = 1e-7
 """No music visualization displayed if recorded audio volume below threshold"""
+

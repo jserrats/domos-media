@@ -1,7 +1,6 @@
-from strip import StripController
 from settings import mqtt_ip
 from music_animation.visualization import microphone, microphone_update, next_animation
-
+import threading
 import paho.mqtt.client as mqtt
 
 class StripMusic(threading.Thread):
