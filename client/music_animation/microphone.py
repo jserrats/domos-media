@@ -15,7 +15,7 @@ def start_stream(callback):
                     frames_per_buffer=frames_per_buffer)
     overflows = 0
     prev_ovf_time = time.time()
-    while not True:
+    while True:
         try:
             y = np.fromstring(stream.read(frames_per_buffer), dtype=np.int16)
             y = y.astype(np.float32)
