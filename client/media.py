@@ -1,6 +1,5 @@
 from strip import StripController
 from settings import mqtt_ip
-from music_animation.led import _sock
 from music_animation.visualization import microphone, microphone_update, next_animation
 
 import paho.mqtt.client as mqtt
@@ -10,7 +9,7 @@ class StripMusic(threading.Thread):
         self.run()
 
     def run(self):
-        microphone.start_stream(microphone_update, self.event)
+        microphone.start_stream(microphone_update)
 
     def effect(self):
         next_animation()

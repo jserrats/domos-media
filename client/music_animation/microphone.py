@@ -5,7 +5,7 @@ import music_animation.config as config
 from music_animation.led import stop
 
 
-def start_stream(callback, work):
+def start_stream(callback):
     p = pyaudio.PyAudio()
     frames_per_buffer = int(config.MIC_RATE / config.FPS)
     stream = p.open(format=pyaudio.paInt16,
@@ -15,7 +15,7 @@ def start_stream(callback, work):
                     frames_per_buffer=frames_per_buffer)
     overflows = 0
     prev_ovf_time = time.time()
-    while not work.is_set():
+    while not True:
         try:
             y = np.fromstring(stream.read(frames_per_buffer), dtype=np.int16)
             y = y.astype(np.float32)
