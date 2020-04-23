@@ -4,11 +4,14 @@
 
 ### Subscriptions
 
-* `domos/strip`
+* `domos/strip/mode`
   * `music_effect`
   * `music`
-  * `rainbow`
   * `clock`
+  * `rainbow`
+
+* `domos/strip`
+  * `on`
   * `off`
 
 * `domos/strip/notification`
@@ -21,7 +24,11 @@
 
 ### Publishes on
 
-* `domos/info/strip`
-  * `rainbow`
+* `domos/info/strip/mode`
+  * `music`
   * `clock`
+  * `rainbow`
+
+* `domos/info/strip`
+  * `on`
   * `off`
