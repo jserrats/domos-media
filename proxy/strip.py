@@ -40,8 +40,11 @@ class StripController:
         if not color:
             color = colors["purple"]
         else:
-            color = colors[color]
-
+            try:
+                color = colors[color]
+            except KeyError:
+                color = colors["purple"]
+                
         if self.current is None:
             self.current = StripNotification(self.sock, color)
             self.current.join()

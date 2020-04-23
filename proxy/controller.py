@@ -10,26 +10,31 @@ class MediaMQTT:
         self.strip.music()
         self.mqtt_client.subscribe("domos/strip/#")
         self.mqtt_client.message_callback_add('domos/strip/#', self.strip_action)
+        self.mqtt_client.message_callback_add('domos/strip/notification', self.notification)
+
 
     def strip_action(self, client, userdata, message):
-        if message.payload.decode() == "rainbow":
-            self.strip.rainbow()
-            self.mqtt_client.publish('domos/info/strip', 'rainbow', retain=True)
-        if message.payload.decode() == "clock":
-            self.strip.clock()
-            self.mqtt_client.publish('domos/info/strip', 'clock', retain=True)
+        payload = message.payload.decode()
 
-        if message.payload.decode() == "music":
-            self.strip.music()
-            self.mqtt_client.publish('domos/info/strip', 'music', retain=True)
-
-        if message.payload.decode() == "off":
+        if payload == "rainbow":    
+            status = self.strip.rainbow()
+        if payload == "clock":
+            status = self.strip.clock()
+        if payload == "music" or payload == "on":
+            status = self.strip.music()
+        if payload == "off":
             self.strip.stop_current_mode()
+            status = False
+        
+        if status:
+            self.mqtt_client.publish('domos/info/strip/mode', payload, retain=True)
+            self.mqtt_client.publish('domos/info/strip', 'on' , retain=True)
+        else:
             self.mqtt_client.publish('domos/info/strip', 'off', retain=True)
-            
-        if message.topic.split('/')[-1] == "notification":
-            color = message.payload.decode()
-            self.strip.notification(color)
+ 
+    def notification(self, client, userdata, message):
+        payload = message.payload.decode()
+        self.strip.notification(payload)
 
 
 if __name__ == "__main__":
