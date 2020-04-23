@@ -22,6 +22,7 @@ class MediaMQTT:
         if payload == "clock":
             status = self.strip.clock()
         if payload == "music" or payload == "on":
+            payload = "music"
             status = self.strip.music()
         if payload == "off":
             self.strip.stop_current_mode()
