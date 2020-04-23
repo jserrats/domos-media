@@ -18,7 +18,7 @@ class MediaMQTT:
     def __init__(self, mqtt):
         self.mqtt_client = mqtt
         self.mqtt_client.subscribe('domos/strip/#')
-        self.mqtt_client.message_callback_add('domos/strip', self.strip_action)
+        self.mqtt_client.message_callback_add('domos/strip/mode', self.strip_action)
         self.strip = StripMusic()
         self.mqtt_client.loop_forever()
 
