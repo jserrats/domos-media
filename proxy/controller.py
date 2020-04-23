@@ -15,6 +15,7 @@ class MediaMQTT:
 
     def strip_action(self, client, userdata, message):
         payload = message.payload.decode()
+        status = None
 
         if payload == "rainbow":    
             status = self.strip.rainbow()
@@ -26,12 +27,13 @@ class MediaMQTT:
             self.strip.stop_current_mode()
             status = False
         
-        if status:
-            self.mqtt_client.publish('domos/info/strip/mode', payload, retain=True)
-            self.mqtt_client.publish('domos/info/strip', 'on' , retain=True)
-        else:
-            self.mqtt_client.publish('domos/info/strip', 'off', retain=True)
- 
+        if status is not None:
+            if status:
+                self.mqtt_client.publish('domos/info/strip/mode', payload, retain=True)
+                self.mqtt_client.publish('domos/info/strip', 'on' , retain=True)
+            else:
+                self.mqtt_client.publish('domos/info/strip', 'off', retain=True)
+    
     def notification(self, client, userdata, message):
         payload = message.payload.decode()
         self.strip.notification(payload)
