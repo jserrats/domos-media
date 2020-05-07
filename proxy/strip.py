@@ -11,7 +11,7 @@ server = socket.socket(socket.AF_INET, # Internet
                      socket.SOCK_DGRAM) # UDP
 server.bind(("0.0.0.0",1234))
 
-NLEDS = 60
+NLEDS = 74
 reverse_strip = False
 
 colors = {"red": [150, 0, 0], "green": [0, 255, 100], "blue": [0, 0, 255], "light_blue": [0, 100, 200],
